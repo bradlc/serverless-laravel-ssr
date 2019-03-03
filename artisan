@@ -17,10 +17,6 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/vendor/autoload.php';
 
-// $lam = getenv('AWS_LAMBDA');
-// $isLambda = isset($lam) && $lam === true;
-// dd($isLambda ? 'true' : 'false');
-
 $input = new Symfony\Component\Console\Input\ArgvInput;
 $output = new Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -32,15 +28,10 @@ if ($stage) {
         'region' => 'eu-west-2',
     ]);
     $result = $lambda->invoke([
-        // 'ClientContext' => '<string>',
-        'FunctionName' => 'serverless-laravel-ssr-' . $stage . '-hello', // REQUIRED
+        'FunctionName' => 'serverless-laravel-ssr-' . $stage . '-hello',
         'Payload' => json_encode([
             'artisan' => trim(preg_replace('/--stage\s+[^\s]+($|\s)/', '', (string)$input)),
         ]),
-        // 'InvocationType' => 'Event|RequestResponse|DryRun',
-        // 'LogType' => 'None|Tail',
-        // 'Payload' => <string || resource || Psr\Http\Message\StreamInterface>,
-        // 'Qualifier' => '<string>',
     ]);
 
     $output->write(json_decode($result->toArray()['Payload']->getContents()));
