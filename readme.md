@@ -6,7 +6,7 @@ Request comes in and node spawns a PHP process. Laravel returns some JSON that s
 
 ## Key files
 
-* [Lambda function](https://github.com/bradlc/serverless-laravel-ssr/blob/master/handler.js)
+* [Lambda function](https://github.com/bradlc/serverless-laravel-ssr/blob/master/handler.js) (based on [Simon Bennett’s article](https://medium.com/artisanhost/hosting-a-laravel-application-on-aws-lamdba-90b7133c8578))
 * [Laravel routes](https://github.com/bradlc/serverless-laravel-ssr/blob/master/routes/web.php)
 
 ## Artisan
