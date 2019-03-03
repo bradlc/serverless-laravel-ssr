@@ -1,0 +1,23 @@
+{
+    "name": "serverless-laravel-ssr",
+    "private": true,
+    "scripts": {
+        "build": "microbundle --external none --target web -i src/client-entry.js -o public/assets/app.js && microbundle --external none -i src/server-entry.js -o public/assets/server/app.js",
+        "deploy": "serverless deploy -v",
+        "deploy-fn": "serverless deploy function --function hello",
+        "serve": "npm run build && polkadot local.js"
+    },
+    "devDependencies": {
+        "microbundle": "^0.10.1",
+        "polkadot": "^1.0.0",
+        "serverless": "^1.38.0",
+        "serverless-api-cloudfront": "^0.9.5"
+    },
+    "dependencies": {
+        "htm": "^2.1.1",
+        "http-string-parser": "0.0.6",
+        "mime": "^2.4.0",
+        "preact": "^8.4.2",
+        "preact-render-to-string": "^4.1.0"
+    }
+}
