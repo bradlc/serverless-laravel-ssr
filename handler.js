@@ -1,7 +1,7 @@
 'use strict'
 
 let child_process = require('child_process')
-let parser = require('http-string-parser')
+let parser = require('./http-string-parser.js')
 let fs = require('fs')
 let path = require('path')
 let mime = require('mime/lite')
@@ -97,20 +97,20 @@ module.exports.handler = (event, context, callback) => {
   )
 
   if (
-    headers['Content-Type'] === 'application/json' &&
+    headers['content-type'][0] === 'application/json' &&
     (!event.queryStringParameters ||
       typeof event.queryStringParameters.__json === 'undefined')
   ) {
     let parsedBody = JSON.parse(body)
     if (parsedBody.component) {
       body = renderApp(parsedBody)
-      headers['Content-Type'] = 'text/html'
+      headers['content-type'][0] = 'text/html'
     }
   }
 
   context.succeed({
     statusCode,
-    headers,
+    multiValueHeaders: headers,
     body
   })
 }
